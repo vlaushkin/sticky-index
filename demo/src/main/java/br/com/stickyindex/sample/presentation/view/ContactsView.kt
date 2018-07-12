@@ -93,7 +93,7 @@ class ContactsView : Fragment() {
      * Scroll the list to the contact with the given name
      */
     fun scrollToContact(name: String) {
-        recyclerView.layoutManager.smoothScrollToPosition(
+        recyclerView.layoutManager?.smoothScrollToPosition(
                 recyclerView,
                 null,
                 adapter.getIndexByContactName(name)

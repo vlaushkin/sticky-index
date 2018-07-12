@@ -37,7 +37,7 @@ class StickyIndexLayoutManager(
      * state of the sticky letters
      */
     fun update(rv: RecyclerView, dy: Float) {
-        if (contentList.adapter.itemCount < 2) return
+        if ((contentList.adapter?.itemCount ?: 0) < 2) return
         synchronizeScrolls(rv)
 
         val firstVisibleItemContainer = contentList.getChildAt(0)

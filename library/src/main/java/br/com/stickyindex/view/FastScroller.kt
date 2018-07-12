@@ -91,7 +91,7 @@ class FastScroller @JvmOverloads constructor(
     fun bindRecyclerView(recyclerView: RecyclerView) {
         this.recyclerView = recyclerView
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 refreshScrollPosition()
             }
         })
@@ -105,7 +105,7 @@ class FastScroller @JvmOverloads constructor(
     }
 
     private fun computeTargetPosition(y: Float): Int {
-        val itemCount = recyclerView.adapter.itemCount
+        val itemCount = recyclerView.adapter?.itemCount ?: 0
         return getValueInRange(0, itemCount - 1, (computeProportion(y) * itemCount.toFloat()).toInt())
     }
 
@@ -153,7 +153,7 @@ class FastScroller @JvmOverloads constructor(
         val firstVisiblePosition = recyclerView.getChildAdapterPosition(firstVisibleView)
         val visibleRange = recyclerView.childCount
         val lastVisiblePosition = firstVisiblePosition + visibleRange
-        val itemCount = recyclerView.adapter.itemCount
+        val itemCount = recyclerView.adapter!!.itemCount
         val position = computePosition(firstVisiblePosition, lastVisiblePosition, itemCount, visibleRange)
         val proportion = position.toFloat() / itemCount.toFloat()
         setBubbleAndHandlePosition(scrollHeight * proportion)
