@@ -65,7 +65,17 @@ class StickyIndex @JvmOverloads constructor(
     fun bindRecyclerView(rv: RecyclerView) {
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
-                stickyStickyIndex.update(rv, dy.toFloat())
+                post {
+                    stickyStickyIndex.synchronizeScrolls(rv)
+                }
+            }
+        })
+
+        index_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
+                post {
+                    stickyStickyIndex.update(dy.toFloat())
+                }
             }
         })
     }

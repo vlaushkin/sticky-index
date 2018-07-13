@@ -24,7 +24,7 @@ class StickyIndexLayoutManager(
     private val header: TextView = container.findViewById(R.id.sticky_index)
     private val layoutManager: LinearLayoutManager = contentList.layoutManager as LinearLayoutManager
 
-    private fun synchronizeScrolls(rv: RecyclerView) {
+    fun synchronizeScrolls(rv: RecyclerView) {
         val firstVisibleView = rv.getChildAt(0)
         layoutManager.scrollToPositionWithOffset(
                 rv.getChildAdapterPosition(firstVisibleView),
@@ -36,9 +36,8 @@ class StickyIndexLayoutManager(
      * Must be called every time the reference {@link RecyclerView} scrolls. This method redraws the
      * state of the sticky letters
      */
-    fun update(rv: RecyclerView, dy: Float) {
+    fun update(dy: Float) {
         if ((contentList.adapter?.itemCount ?: 0) < 2) return
-        synchronizeScrolls(rv)
 
         val firstVisibleItemContainer = contentList.getChildAt(0)
         val firstVisibleItem = firstVisibleItemContainer.findViewById<TextView>(R.id.sticky_row_index)
