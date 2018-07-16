@@ -24,6 +24,9 @@ class StickyIndexLayoutManager(
     private val header: TextView = container.findViewById(R.id.sticky_index)
     private val layoutManager: LinearLayoutManager = contentList.layoutManager as LinearLayoutManager
 
+    private var prevVisibleItemPosition = 0
+    private var savedIsDown: Boolean = true
+
     fun synchronizeScrolls(rv: RecyclerView) {
         val firstVisibleView = rv.getChildAt(0)
         layoutManager.scrollToPositionWithOffset(
@@ -36,7 +39,7 @@ class StickyIndexLayoutManager(
      * Must be called every time the reference {@link RecyclerView} scrolls. This method redraws the
      * state of the sticky letters
      */
-    fun update(dy: Float) {
+    fun update() {
         if ((contentList.adapter?.itemCount ?: 0) < 2) return
 
         val firstVisibleItemContainer = contentList.getChildAt(0)
@@ -44,13 +47,13 @@ class StickyIndexLayoutManager(
         displayHeader(firstVisibleItem)
         val nextVisibleItem = contentList.getChildAt(1).findViewById<TextView>(R.id.sticky_row_index)
 
-        if (isHeader(firstVisibleItem, nextVisibleItem)) {
-            animateTransitionToNext(firstVisibleItem, firstVisibleItemContainer, nextVisibleItem)
-        } else {
-            firstVisibleItem.visibility = INVISIBLE
-            if (isScrollingDown(dy)) header.visibility = VISIBLE
-            else nextVisibleItem.visibility = INVISIBLE
-        }
+//        if (isHeader(firstVisibleItem, nextVisibleItem)) {
+//            animateTransitionToNext(firstVisibleItem, firstVisibleItemContainer, nextVisibleItem)
+//        } else {
+//            firstVisibleItem.visibility = INVISIBLE
+//            if (isScrollingDown()) header.visibility = VISIBLE
+//            else nextVisibleItem.visibility = INVISIBLE
+//        }
     }
 
     private fun displayHeader(firstItem: TextView) {
@@ -79,7 +82,24 @@ class StickyIndexLayoutManager(
         header.setTextColor(style.color)
     }
 
-    private fun isScrollingDown(d: Float) = d > 0
+    private fun isScrollingDown(): Boolean {
+        val nextVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+
+        val isDown: Boolean
+        if (nextVisiblePosition > prevVisibleItemPosition) {
+            isDown = true
+        } else if (nextVisiblePosition < prevVisibleItemPosition) {
+            isDown = false
+        } else {
+            isDown = savedIsDown
+        }
+
+        prevVisibleItemPosition = nextVisiblePosition
+        savedIsDown = isDown
+
+        return isDown
+    }
+
     private fun computeAlpha(row: View, idx: TextView) = 1 - abs(row.y) / idx.height
     private fun isHeader(prev: TextView, act: TextView) = prev.text[0].toLowerCase() != act.text[0].toLowerCase()
 }
