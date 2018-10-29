@@ -44,7 +44,7 @@ def support = [
 
 def buildConfig = [
         compileSdkVersion : 28,
-        minSdkVersion     : 22,
+        minSdkVersion     : 19,
         targetSdk         : 28,
         targetSdkVersion  : 28,
 
