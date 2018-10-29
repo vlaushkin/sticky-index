@@ -1,8 +1,8 @@
 def versions = [
         dagger               : "2.11",
         architectureLifecycle: "1.1.0",
-        support              : "28.0.0-alpha3",
-        kotlin               : "1.2.51"
+        support              : "28.0.0",
+        kotlin               : "1.2.71"
 ]
 
 def ap = [
@@ -48,7 +48,7 @@ def buildConfig = [
         targetSdk         : 28,
         targetSdkVersion  : 28,
 
-        gradlePlugin      : 'com.android.tools.build:gradle:3.3.0-alpha02',
+        gradlePlugin      : 'com.android.tools.build:gradle:3.3.0-alpha06',
 
         kotlinGradlePlugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
         kotlinStdLib      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
