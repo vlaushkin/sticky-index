@@ -29,10 +29,12 @@ class StickyIndexLayoutManager(
 
     fun synchronizeScrolls(rv: RecyclerView) {
         val firstVisibleView = rv.getChildAt(0)
-        layoutManager.scrollToPositionWithOffset(
-                rv.getChildAdapterPosition(firstVisibleView),
-                firstVisibleView.top
-        )
+
+        rv.getChildAt(0)?.let {
+            layoutManager.scrollToPositionWithOffset(
+                    rv.getChildAdapterPosition(firstVisibleView),
+                    firstVisibleView.top)
+        }
     }
 
     /**
@@ -45,15 +47,6 @@ class StickyIndexLayoutManager(
         val firstVisibleItemContainer = contentList.getChildAt(0)
         val firstVisibleItem = firstVisibleItemContainer.findViewById<TextView>(R.id.sticky_row_index)
         displayHeader(firstVisibleItem)
-        val nextVisibleItem = contentList.getChildAt(1).findViewById<TextView>(R.id.sticky_row_index)
-
-//        if (isHeader(firstVisibleItem, nextVisibleItem)) {
-//            animateTransitionToNext(firstVisibleItem, firstVisibleItemContainer, nextVisibleItem)
-//        } else {
-//            firstVisibleItem.visibility = INVISIBLE
-//            if (isScrollingDown()) header.visibility = VISIBLE
-//            else nextVisibleItem.visibility = INVISIBLE
-//        }
     }
 
     private fun displayHeader(firstItem: TextView) {
