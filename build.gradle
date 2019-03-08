@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath config.build.gradlePlugin
+        classpath 'com.android.tools.build:gradle:3.3.1'
         classpath config.build.kotlinGradlePlugin
     }
 }
