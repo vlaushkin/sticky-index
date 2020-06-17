@@ -8,7 +8,6 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
-import br.com.edsilfer.toolkit.core.util.InvalidData.Companion.isInvalid
 import br.com.stickyindex.R
 import br.com.stickyindex.model.RowStyle
 import br.com.stickyindex.model.StickyIndexViewHolder
@@ -32,11 +31,11 @@ class StickyIndexAdapter(
 
     private fun applyStyle(view: View) {
         if (rowStyle == null) return
-        if (!isInvalid(rowStyle.height)) setLayoutParams(view, rowStyle)
+        if (rowStyle.height > 0f) setLayoutParams(view, rowStyle)
         val index = view.findViewById<TextView>(R.id.sticky_row_index)
-        if (!isInvalid(rowStyle.color)) index.setTextColor(rowStyle.color)
-        if (!isInvalid(rowStyle.size.toInt())) index.setTextSize(COMPLEX_UNIT_PX, rowStyle.size)
-        if (!isInvalid(rowStyle.style)) index.setTypeface(null, rowStyle.style)
+        if (rowStyle.color != 0) index.setTextColor(rowStyle.color)
+        if (rowStyle.size.toInt() != 0) index.setTextSize(COMPLEX_UNIT_PX, rowStyle.size)
+        if (rowStyle.style != 0) index.setTypeface(null, rowStyle.style)
     }
 
     private fun setLayoutParams(view: View, rowStyle: RowStyle) {

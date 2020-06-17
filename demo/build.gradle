@@ -35,7 +35,6 @@ dependencies {
     implementation deps.architecture.lifecycleExtensions
     implementation deps.architecture.lifecycleRuntime
 
-    implementation(deps.edsilfer.toolkit) { transitive = true }
     implementation deps.edsilfer.search
     implementation project(':library')
 

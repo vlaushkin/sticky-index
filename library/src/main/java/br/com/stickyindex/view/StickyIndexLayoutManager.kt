@@ -8,7 +8,6 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.RelativeLayout
 import android.widget.TextView
-import br.com.edsilfer.toolkit.core.util.InvalidData.Companion.isInvalid
 import br.com.stickyindex.R
 import br.com.stickyindex.model.RowStyle
 import java.lang.Math.abs
@@ -70,8 +69,8 @@ class StickyIndexLayoutManager(
      * Applies a {@link RowStyle} in the sticky header
      */
     fun applyStyle(style: RowStyle) {
-        if (!isInvalid(style.size)) header.setTextSize(COMPLEX_UNIT_PX, style.size)
-        if (!isInvalid(style.style)) header.setTypeface(null, style.style)
+        if (style.size > 0f) header.setTextSize(COMPLEX_UNIT_PX, style.size)
+        if (style.style != 0) header.setTypeface(null, style.style)
         header.setTextColor(style.color)
     }
 

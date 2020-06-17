@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater.from
 import android.view.MotionEvent.ACTION_MOVE
 import android.widget.RelativeLayout
-import br.com.edsilfer.toolkit.core.util.InvalidData.Companion.isInvalid
 import br.com.stickyindex.R
 import br.com.stickyindex.model.RowStyle
 import br.com.stickyindex.model.RowStyleMapper.map
@@ -35,7 +34,7 @@ class StickyIndex @JvmOverloads constructor(
         if (style == null) return
         stickyStickyIndex.applyStyle(style)
         renderStickyWrapper(style)
-        if (!isInvalid(style.height)) {
+        if (style.height > 0f) {
             val params = sticky_index_wrapper.layoutParams
             params.height = style.height.toInt()
             sticky_index_wrapper.layoutParams = params

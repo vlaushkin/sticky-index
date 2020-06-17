@@ -25,7 +25,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.support.recyclerview
 
-    api deps.edsilfer.toolkit
     api deps.external.timber
     api deps.external.rxandroid
     api deps.external.rxjava

@@ -5,19 +5,13 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name=".common.App"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
 
-        <provider
-            android:name=".data.SuggestionProvider"
-            android:authorities="data.SuggestionProvider"
-            android:exported="false" />
-
         <activity
-            android:name=".presentation.view.MainView"
+            android:name="MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
